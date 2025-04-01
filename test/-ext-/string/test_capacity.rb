@@ -31,9 +31,9 @@ class Test_StringCapacity < Test::Unit::TestCase
 
   def test_io_read
     s = String.new(capacity: 1000)
-    open(__FILE__) {|f|f.read(1024*1024, s)}
+    File.open(__FILE__) {|f|f.read(1024*1024, s)}
     assert_equal(1024*1024, capa(s))
-    open(__FILE__) {|f|s = f.read(1024*1024)}
+    File.open(__FILE__) {|f|s = f.read(1024*1024)}
     assert_operator(capa(s), :<=, s.bytesize+4096)
   end
 
